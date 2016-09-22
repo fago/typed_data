@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/fago/typed_data.svg?branch=8.x-1.x)](https://travis-ci.org/fago/typed_data)
 
-Extends the core Typed Data API with new APIS and features.
+Extends the core Typed Data API with new APIs and features.
 
 * Project homepage: https://www.drupal.org/project/typed_data
 * For example usage, see the Rules module: https://www.drupal.org/project/rules
