@@ -1,0 +1,82 @@
+language: php
+# The Travis CI container mode has random functional test fails, so we must use
+# sudo here.
+sudo: true
+
+php:
+  - 5.5
+  - 5.6
+  - 7
+  # HHVM is disabled for now because we have not figured out yet how to start a
+  # web server for the browser tests.
+  #- hhvm
+
+env:
+  - DRUPAL_CORE=8.1.x
+  - DRUPAL_CORE=8.2.x
+  - DRUPAL_CORE=8.3.x
+
+matrix:
+  allow_failures:
+    # We cannot use hhvm-nightly since that does not work in Travis CI's old
+    # Ubuntu 12.04.
+    #- php: hhvm
+  # Don't wait for the allowed failures to build.
+  fast_finish: true
+
+mysql:
+  database: typed_data
+  username: root
+  encoding: utf8
+
+# Cache composer downloads because cloning Coder form drupal.org is very slow :-(
+cache:
+  directories:
+    - $HOME/.composer
+
+before_script:
+  # Remove Xdebug as we don't need it and it causes
+  # PHP Fatal error:  Maximum function nesting level of '256' reached.
+  # We also don't care if that file exists or not on PHP 7.
+  - phpenv config-rm xdebug.ini || true
+
+  # Remember the current typed_data test directory for later use in the Drupal
+  # installation.
+  - TESTDIR=$(pwd)
+  # Navigate out of module directory to prevent blown stack by recursive module
+  # lookup.
+  - cd ..
+
+  # Create database.
+  - mysql -e 'create database typed_data'
+  # Export database variable for kernel tests.
+  - export SIMPLETEST_DB=mysql://root:@127.0.0.1/typed_data
+  # Download Drupal 8 core from the Github mirror because it is faster.
+  - travis_retry git clone --branch $DRUPAL_CORE --depth 1 https://github.com/drupal/drupal.git
+  - cd drupal
+  # Temporary core hack to get debug information when random test fails occur.
+  # See https://www.drupal.org/node/2659954
+  - wget -q -O - https://www.drupal.org/files/issues/core-debug_0.txt | patch -p1
+
+  # Reference typed_data in build site.
+  - ln -s $TESTDIR modules/typed_data
+
+  # Run composer install for Drupal 8.1 and up. We need an up-to-date composer
+  # when installing Drupal 8.1.
+  - travis_retry composer self-update && travis_retry composer install
+
+  # Start a web server on port 8888, run in the background.
+  - php -S localhost:8888 &
+
+  # Export web server URL for browser tests.
+  - export SIMPLETEST_BASE_URL=http://localhost:8888
+
+  # Install PHPCS to check for Drupal coding standards.
+  - travis_retry composer global require drupal/coder
+  - ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+
+script:
+  # Run the PHPUnit tests which also include the kernel tests.
+  - ./vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/typed_data
+  # Check for coding standards violations
+  - cd modules/typed_data && ~/.composer/vendor/bin/phpcs
