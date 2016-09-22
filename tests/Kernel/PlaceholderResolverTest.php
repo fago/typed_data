@@ -54,7 +54,14 @@ class PlaceholderResolverTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['typed_data', 'system', 'node', 'field', 'text', 'user'];
+  public static $modules = [
+    'typed_data',
+    'system',
+    'node',
+    'field',
+    'text',
+    'user',
+  ];
 
   /**
    * {@inheritdoc}
