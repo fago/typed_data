@@ -37,7 +37,11 @@ For further information on how to contribute please refer to
 This module comes with PHPUnit tests. You need a working Drupal 8 installation
 and a checkout of the Rules module in the modules folder.
 
-#### Unit tests only
+
+Make sure to use your DB connection details for the SIMPLETEST_DB and the URL to
+your local Drupal installation for SIMPLETEST_BASE_URL.
 
     cd /path/to/drupal-8/core
-    ../vendor/bin/phpunit ../modules/typed_data/tests
+    export SIMPLETEST_DB=mysql://drupal-8:password@localhost/drupal-8
+    export SIMPLETEST_BASE_URL=http://drupal-8.localhost
+    ../vendor/bin/phpunit ../modules/typed_data
