@@ -1,4 +1,4 @@
 name: Typed Data
 type: module
-description: 'Extends the core Typed Data API with new APIS and features.'
+description: 'Extends the core Typed Data API with new APIs and features.'
 core: 8.x
