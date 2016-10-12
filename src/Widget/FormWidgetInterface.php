@@ -3,7 +3,6 @@
 namespace Drupal\typed_data\Widget;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
-use Drupal\Component\Plugin\Context\ContextDefinitionInterface;
 use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;

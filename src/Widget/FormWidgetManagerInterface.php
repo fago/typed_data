@@ -9,7 +9,7 @@ use Drupal\Component\Plugin\PluginManagerInterface;
  *
  * @see \Drupal\typed_data\Widget\FormWidgetInterface
  */
-interface FormWidgetManagerInterface extends PluginManagerInterface  {
+interface FormWidgetManagerInterface extends PluginManagerInterface {
 
   /**
    * Creates a form widget plugin instance.
