@@ -81,7 +81,7 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
   /**
    * Defines the supported configuration settings.
    *
-   * If the widget is configurable, this methos must define the supported
+   * If the widget is configurable, this method must define the supported
    * setting values. The definitions may include suiting widgets and widget
    * configurations for generating a configuration form.
    *
