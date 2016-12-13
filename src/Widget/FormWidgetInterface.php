@@ -17,7 +17,7 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    * Returns if the widget can be used for the provided data.
    *
    * @param \Drupal\Core\TypedData\DataDefinitionInterface $definition
-   *   The definition of the data.
+   *   The definition of the edited data.
    *
    * @return bool
    *   Whether the data can be edited with the widget.
@@ -85,11 +85,14 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    * setting values. The definitions may include suiting widgets and widget
    * configurations for generating a configuration form.
    *
+   * @param \Drupal\Core\TypedData\DataDefinitionInterface $definition
+   *   The definition of the edited data.
+   *
    * @return ContextDefinitionInterface[]
    *   An array of data definitions describing the configuration values, keyed
    *   by configuration setting name. The keys must match the actual keys of
    *   the supported configuration.
    */
-  public function getConfigurationDataDefinitions();
+  public function getConfigurationDataDefinitions(DataDefinitionInterface $definition);
 
 }
