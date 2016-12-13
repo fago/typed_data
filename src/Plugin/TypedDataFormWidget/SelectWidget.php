@@ -3,19 +3,19 @@
 namespace Drupal\typed_data\Plugin\TypedDataFormWidget;
 
 use Drupal\Core\Form\SubformStateInterface;
-use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
-use Drupal\Core\TypedData\Type\StringInterface;
+use Drupal\Core\TypedData\OptionsProviderInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\rules\Context\ContextDefinition;
 use Drupal\typed_data\Widget\ContextDefinitionInterface;
 use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * Implements a simple, one-line text input widget.
+ * Implements a select widget.
  */
-class TextInputWidget extends FormWidgetBase {
+class SelectWidget extends FormWidgetBase {
 
   /**
    * {@inheritdoc}
@@ -24,9 +24,7 @@ class TextInputWidget extends FormWidgetBase {
     return parent::defaultConfiguration() + [
       'label' => NULL,
       'description' => NULL,
-      'placeholder' => NULL,
-      'size' => 60,
-      'maxlength' => 255,
+      'empty_option' => NULL,
     ];
   }
 
@@ -34,7 +32,7 @@ class TextInputWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function isApplicable(DataDefinitionInterface $definition) {
-    return is_subclass_of($definition->getClass(), StringInterface::class);
+    return is_subclass_of($definition->getClass(), OptionsProviderInterface::class);
   }
 
   /**
@@ -42,13 +40,13 @@ class TextInputWidget extends FormWidgetBase {
    */
   public function form(TypedDataInterface $data, SubformStateInterface $form_state) {
     return [
-      '#type' => 'text',
+      '#type' => 'select',
       '#title' => $this->configuration['label'] ?: $data->getDataDefinition()->getLabel(),
       '#description' => $this->configuration['description'] ?: $data->getDataDefinition()->getDescription(),
       '#default_value' => $data->getValue(),
-      '#placeholder' => $this->configuration['placeholder'],
-      '#size' => $this->configuration['size'],
-      '#maxlength' => $this->configuration['maxlength'],
+      '#multiple' => $this->configuration['multiple'],
+      '#empty_option' => $this->configuration['empty_option'],
+      '#empty_value' => '',
       '#required' => $data->getDataDefinition()->isRequired(),
       '#disabled' => $data->getDataDefinition()->isReadOnly(),
     ];
@@ -80,16 +78,13 @@ class TextInputWidget extends FormWidgetBase {
    */
   public function getConfigurationDataDefinitions(DataDefinitionInterface $definition) {
     return [
-      'label' => DataDefinition::create('string')
+      'label' => ContextDefinition::create('string')
         ->setLabel($this->t('Label')),
-      'description' => DataDefinition::create('string')
+      'description' => ContextDefinition::create('string')
         ->setLabel($this->t('Description')),
-      'placeholder' => DataDefinition::create('string')
-        ->setLabel($this->t('Placeholder value')),
-      'size' => DataDefinition::create('integer')
-        ->setLabel($this->t('Input field size')),
-      'maxlength' => DataDefinition::create('integer')
-        ->setLabel($this->t('Maximum text length')),
+      'empty_option' => ContextDefinition::create('string')
+        ->setLabel($this->t('Empty option label'))
+        ->setDescription($this->t('Allows overriding the label of the empty option')),
     ];
   }
 
