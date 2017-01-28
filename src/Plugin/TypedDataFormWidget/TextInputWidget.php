@@ -7,6 +7,7 @@ use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\Type\StringInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\typed_data\Form\SubformState;
 use Drupal\typed_data\Widget\ContextDefinitionInterface;
 use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -45,8 +46,9 @@ class TextInputWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function form(TypedDataInterface $data, SubformStateInterface $form_state) {
-    return [
-      '#type' => 'text',
+    $form = SubformState::getNewSubForm();
+    $form['value'] = [
+      '#type' => 'textfield',
       '#title' => $this->configuration['label'] ?: $data->getDataDefinition()->getLabel(),
       '#description' => $this->configuration['description'] ?: $data->getDataDefinition()->getDescription(),
       '#default_value' => $data->getValue(),
@@ -56,26 +58,28 @@ class TextInputWidget extends FormWidgetBase {
       '#required' => $data->getDataDefinition()->isRequired(),
       '#disabled' => $data->getDataDefinition()->isReadOnly(),
     ];
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function extractFormValues(TypedDataInterface $data, array $element, SubformStateInterface $form_state) {
+  public function extractFormValues(TypedDataInterface $data, SubformStateInterface $form_state) {
     // Ensure empty values correctly end up as NULL value.
-    if ($element['#value'] === '') {
-      $element['#value'] = NULL;
+    $value = $form_state->getValue('value');
+    if ($value === '') {
+      $value = NULL;
     }
-    $data->setValue($element['#value']);
+    $data->setValue($value);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, array $element, SubformStateInterface $form_state) {
+  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState) {
     foreach ($violations as $offset => $violation) {
       /** @var ConstraintViolationInterface $violation */
-      $form_state->setError($element, $violation->getMessage());
+      $formState->setErrorByName('value', $violation->getMessage());
     }
   }
 

@@ -4,9 +4,11 @@ namespace Drupal\typed_data\Plugin\TypedDataFormWidget;
 
 use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\TypedData\DataDefinitionInterface;
+use Drupal\Core\TypedData\ListInterface;
 use Drupal\Core\TypedData\OptionsProviderInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\rules\Context\ContextDefinition;
+use Drupal\typed_data\Form\SubformState;
 use Drupal\typed_data\Widget\ContextDefinitionInterface;
 use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -43,37 +45,42 @@ class SelectWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function form(TypedDataInterface $data, SubformStateInterface $form_state) {
-    return [
+    assert($data instanceof OptionsProviderInterface);
+    $form = SubformState::getNewSubForm();
+    $form['value'] = [
       '#type' => 'select',
       '#title' => $this->configuration['label'] ?: $data->getDataDefinition()->getLabel(),
       '#description' => $this->configuration['description'] ?: $data->getDataDefinition()->getDescription(),
       '#default_value' => $data->getValue(),
-      '#multiple' => $this->configuration['multiple'],
+      '#multiple' => $data instanceof ListInterface,
       '#empty_option' => $this->configuration['empty_option'],
       '#empty_value' => '',
       '#required' => $data->getDataDefinition()->isRequired(),
       '#disabled' => $data->getDataDefinition()->isReadOnly(),
+      '#options' => $data->getSettableOptions(),
     ];
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function extractFormValues(TypedDataInterface $data, array $element, SubformStateInterface $form_state) {
+  public function extractFormValues(TypedDataInterface $data, SubformStateInterface $form_state) {
     // Ensure empty values correctly end up as NULL value.
-    if ($element['#value'] === '') {
-      $element['#value'] = NULL;
+    $value = $form_state->getValue('value');
+    if ($value === '') {
+      $value = NULL;
     }
-    $data->setValue($element['#value']);
+    $data->setValue($value);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, array $element, SubformStateInterface $form_state) {
+  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState) {
     foreach ($violations as $offset => $violation) {
       /** @var ConstraintViolationInterface $violation */
-      $form_state->setError($element, $violation->getMessage());
+      $formState->setErrorByName('value', $violation->getMessage());
     }
   }
 
