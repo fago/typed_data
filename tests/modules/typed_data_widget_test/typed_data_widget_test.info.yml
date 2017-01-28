@@ -1,0 +1,6 @@
+name: Typed Data Widgets Test
+type: module
+description: 'Implements example forms using typed data widgets.'
+core: 8.x
+dependencies:
+  - typed_data
