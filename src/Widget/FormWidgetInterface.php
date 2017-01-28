@@ -86,10 +86,10 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    *   The definition of the edited data.
    *
    * @return ContextDefinitionInterface[]
-   *   An array of data definitions describing the configuration values, keyed
-   *   by configuration setting name. The keys must match the actual keys of
-   *   the supported configuration.
+   *   An array of context definitions describing the configuration values,
+   *   keyed by configuration setting name. The keys must match the actual keys
+   *   of the supported configuration.
    */
-  public function getConfigurationDataDefinitions(DataDefinitionInterface $definition);
+  public function getConfigurationDefinitions(DataDefinitionInterface $definition);
 
 }
