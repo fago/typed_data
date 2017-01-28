@@ -86,7 +86,7 @@ class TextInputWidget extends FormWidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function getConfigurationDataDefinitions(DataDefinitionInterface $definition) {
+  public function getConfigurationDefinitions(DataDefinitionInterface $definition) {
     return [
       'label' => DataDefinition::create('string')
         ->setLabel($this->t('Label')),

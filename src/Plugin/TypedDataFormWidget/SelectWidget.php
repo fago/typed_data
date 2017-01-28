@@ -87,7 +87,7 @@ class SelectWidget extends FormWidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function getConfigurationDataDefinitions(DataDefinitionInterface $definition) {
+  public function getConfigurationDefinitions(DataDefinitionInterface $definition) {
     return [
       'label' => ContextDefinition::create('string')
         ->setLabel($this->t('Label')),
