@@ -40,8 +40,9 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    * @param \Drupal\Core\Form\SubformStateInterface $form_state
    *   The form state of the widget's form.
    *
-   * @return array
-   *   The form elements for the given data.
+   * @return array[]
+   *   The form elements for the given data. Note that this must be an array,
+   *   holding one or more form-elements.
    */
   public function form(TypedDataInterface $data, SubformStateInterface $form_state);
 
@@ -50,17 +51,15 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    *
    * @param \Drupal\Core\TypedData\TypedDataInterface $data
    *   The data to be updated with the submitted form values.
-   * @param array $element
-   *   The form structure of this form widget.
    * @param \Drupal\Core\Form\SubformStateInterface $form_state
    *   The form state of the widget's form.
    */
-  public function extractFormValues(TypedDataInterface $data, array $element, SubformStateInterface $form_state);
+  public function extractFormValues(TypedDataInterface $data, SubformStateInterface $form_state);
 
   /**
    * Reports validation errors against actual form elements.
    *
-   * Depending on the widget's internal structure, a field-level validation
+   * Depending on the widget's internal structure, a property-level validation
    * error needs to be flagged on the right sub-element.
    *
    * Note that validation is run according to the validation constraints of
@@ -71,12 +70,10 @@ interface FormWidgetInterface extends ConfigurablePluginInterface {
    *   The data to be edited.
    * @param \Symfony\Component\Validator\ConstraintViolationListInterface $violations
    *   A list of constraint violations to flag.
-   * @param array $element
-   *   The form structure of this form widget.
-   * @param \Drupal\Core\Form\SubformStateInterface $form_state
+   * @param \Drupal\Core\Form\SubformStateInterface $formState
    *   The form state of the widget's form.
    */
-  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, array $element, SubformStateInterface $form_state);
+  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState);
 
   /**
    * Defines the supported configuration settings.

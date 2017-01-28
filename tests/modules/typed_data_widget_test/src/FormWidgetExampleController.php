@@ -25,7 +25,7 @@ class FormWidgetExampleController extends ControllerBase {
 
     foreach ($this->getFormWidgetManager()->getDefinitions() as $id => $definition) {
       $build['#items'][$id] = [
-        '#title' => $this->t('Examples'),
+        '#title' => $definition['label'],
         '#type' => 'link',
         '#url' => Url::fromRoute('typed_data_widget_test.examples.form', ['widget_id' => $id]),
       ];
