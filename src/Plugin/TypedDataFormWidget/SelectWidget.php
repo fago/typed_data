@@ -13,7 +13,11 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * Implements a select widget.
+ * @TypedDataFormWidget(
+ *   id = "select",
+ *   label = @Translation("Select"),
+ *   description = @Translation("A simple select box."),
+ * )
  */
 class SelectWidget extends FormWidgetBase {
 

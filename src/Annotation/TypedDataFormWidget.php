@@ -27,4 +27,13 @@ class TypedDataFormWidget extends Plugin {
    */
   public $label;
 
+  /**
+   * The human-readable description of the widget.
+   *
+   * @var \Drupal\Core\Annotation\Translation
+   *
+   * @ingroup plugin_translatable
+   */
+  public $description;
+
 }

@@ -13,7 +13,11 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * Implements a simple, one-line text input widget.
+ * @TypedDataFormWidget(
+ *   id = "text_input",
+ *   label = @Translation("Text input"),
+ *   description = @Translation("A simple, one-line text input widget."),
+ * )
  */
 class TextInputWidget extends FormWidgetBase {
 
