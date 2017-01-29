@@ -17,7 +17,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group typed_data
  *
- * @covers \Drupal\typed_data\PlaceholderResolver
+ * @coversDefaultClass \Drupal\typed_data\PlaceholderResolver
  */
 class PlaceholderResolverTest extends KernelTestBase {
 
