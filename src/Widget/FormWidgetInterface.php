@@ -74,7 +74,7 @@ interface FormWidgetInterface extends ConfigurablePluginInterface, PluginInspect
    * @param \Drupal\Core\Form\SubformStateInterface $formState
    *   The form state of the widget's form.
    */
-  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState);
+  public function flagViolations(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState);
 
   /**
    * Defines the supported configuration settings.

@@ -99,7 +99,7 @@ class FormWidgetExampleForm extends FormBase {
 
     // Validate the data and flag possible violations.
     $violations = $data->validate();
-    $widget->flagErrors($data, $violations, $subform_state);
+    $widget->flagViolations($data, $violations, $subform_state);
   }
 
   /**
