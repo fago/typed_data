@@ -12,7 +12,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group typed_data
  *
- * @cover \Drupal\typed_data\DataFilterManager
+ * @covers \Drupal\typed_data\DataFilterManager
  */
 class DataFiterTest extends KernelTestBase {
 
@@ -51,7 +51,7 @@ class DataFiterTest extends KernelTestBase {
   }
 
   /**
-   * @cover \Drupal\typed_data\Plugin\TypedDataFilter\LowerFilter
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\LowerFilter
    */
   public function testLowerFilter() {
     $filter = $this->dataFilterManager->createInstance('lower');
@@ -66,7 +66,7 @@ class DataFiterTest extends KernelTestBase {
   }
 
   /**
-   * @cover \Drupal\typed_data\Plugin\TypedDataFilter\DefaultFilter
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\DefaultFilter
    */
   public function testDefaultFilter() {
     $filter = $this->dataFilterManager->createInstance('default');
@@ -90,7 +90,7 @@ class DataFiterTest extends KernelTestBase {
   }
 
   /**
-   * @cover \Drupal\typed_data\Plugin\TypedDataFilter\FormatDateFilter
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\FormatDateFilter
    */
   public function testFormatDateFilter() {
     $filter = $this->dataFilterManager->createInstance('format_date');
