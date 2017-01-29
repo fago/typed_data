@@ -14,7 +14,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *
  * @group typed_data
  *
- * @covers \Drupal\typed_data\DataFetcher
+ * @coversDefaultClass \Drupal\typed_data\DataFetcher
  */
 class DataFetcherTest extends KernelTestBase {
 

@@ -12,7 +12,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group typed_data
  *
- * @covers \Drupal\typed_data\DataFilterManager
+ * @coversDefaultClass \Drupal\typed_data\DataFilterManager
  */
 class DataFiterTest extends KernelTestBase {
 
