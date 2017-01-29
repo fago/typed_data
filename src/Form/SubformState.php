@@ -32,7 +32,7 @@ class SubformState extends CoreSubformState {
    *
    * @return static
    */
-  public static function createWithParents($arrayParents, array &$parentForm, FormStateInterface $parentFormState) {
+  public static function createWithParents(array $arrayParents, array &$parentForm, FormStateInterface $parentFormState) {
     $exists = NULL;
     $form = &NestedArray::getValue($parentForm, $arrayParents, $exists);
     if (!$exists) {
