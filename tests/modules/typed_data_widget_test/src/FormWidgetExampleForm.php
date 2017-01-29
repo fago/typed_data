@@ -41,8 +41,9 @@ class FormWidgetExampleForm extends FormBase {
       case 'text_input':
         return ContextDefinition::create('string')
           ->setLabel('Example string')
-          ->setDescription('Some example string')
-          ->setDefaultValue('default');
+          ->setDescription('Some example string with max. 8 characters.')
+          ->setDefaultValue('default')
+          ->addConstraint('Length', ['max' => 8]);
       case 'select':
         return ContextDefinition::create('filter_format')
           ->setLabel('Filter format')
