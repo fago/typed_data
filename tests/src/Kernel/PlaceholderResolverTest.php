@@ -17,7 +17,7 @@ use Drupal\KernelTests\KernelTestBase;
  *
  * @group typed_data
  *
- * @cover \Drupal\typed_data\PlaceholderResolver
+ * @coversDefaultClass \Drupal\typed_data\PlaceholderResolver
  */
 class PlaceholderResolverTest extends KernelTestBase {
 
@@ -105,7 +105,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover scan
+   * @covers ::scan
    */
   public function testScanningForPlaceholders() {
     $text = 'token {{example.foo}} and {{example.foo.bar}} just as {{example.foo|default(bar)}} and {{ example.whitespace }}';
@@ -129,7 +129,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover resolvePlaceholders
+   * @covers ::resolvePlaceholders
    */
   public function testResolvingPlaceholders() {
     $text = 'test {{node.title}} and {{node.title.value}}';
@@ -154,7 +154,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testReplacePlaceholders() {
     $text = 'test {{node.title}} and {{node.title.value}}';
@@ -163,7 +163,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testPlaceholdersAcrossReferences() {
     $user = $this->entityTypeManager->getStorage('user')
@@ -178,7 +178,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testPlaceholdersWithMissingData() {
     $text = 'test {{node.title.1.value}}';
@@ -191,7 +191,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testStringEncoding() {
     $this->node->title->value = '<b>XSS</b>';
@@ -201,7 +201,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testIntegerPlaceholder() {
     $this->node->field_integer->value = 3;
@@ -211,7 +211,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testListPlaceholder() {
     $this->node->field_integer = [1, 2];
@@ -221,7 +221,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testApplyingFilters() {
     $this->node->field_integer = [1, 2, NULL];
@@ -250,7 +250,7 @@ class PlaceholderResolverTest extends KernelTestBase {
   }
 
   /**
-   * @cover replacePlaceHolders
+   * @covers ::replacePlaceHolders
    */
   public function testBubbleableMetadata() {
     // Make sure the bubbleable metadata added by the fetcher is properly passed

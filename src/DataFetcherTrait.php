@@ -3,7 +3,7 @@
 namespace Drupal\typed_data;
 
 /**
- * Wrapper methods for classes that need the data fetcher object.
+ * Helper for classes that need the data fetcher object.
  */
 trait DataFetcherTrait {
 
