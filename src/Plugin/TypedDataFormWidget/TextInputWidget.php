@@ -78,7 +78,7 @@ class TextInputWidget extends FormWidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function flagErrors(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState) {
+  public function flagViolations(TypedDataInterface $data, ConstraintViolationListInterface $violations, SubformStateInterface $formState) {
     foreach ($violations as $violation) {
       /** @var ConstraintViolationInterface $violation */
       $formState->setErrorByName('value', $violation->getMessage());
