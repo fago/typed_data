@@ -9,6 +9,7 @@ use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\typed_data\BrowserTestHelpersTrait;
+use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
 /**
@@ -22,6 +23,7 @@ class TextInputWidgetTest extends BrowserTestBase {
 
   use BrowserTestHelpersTrait;
   use FormWidgetManagerTrait;
+  use StateTrait;
   use TypedDataTrait;
 
   /**
@@ -78,7 +80,7 @@ class TextInputWidgetTest extends BrowserTestBase {
       ->setLabel('Example string')
       ->setDescription('Some example string')
       ->setDefaultValue('default1');
-    \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
+    $this->getState()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
@@ -93,6 +95,33 @@ class TextInputWidgetTest extends BrowserTestBase {
 
     $this->drupalGet($path);
     $this->assertSession()->fieldValueEquals('data[value]', 'jump');
+  }
+
+  /**
+   * @covers ::form
+   * @covers ::flagViolations
+   */
+  public function testValidation() {
+    $context_definition = ContextDefinition::create('string')
+      ->setLabel('Example string')
+      ->setDescription('Some example string')
+      ->setDefaultValue('default1')
+      ->addConstraint('Length', ['max' => 3]);
+    $this->getState()->set('typed_data_widgets.definition', $context_definition);
+
+    $this->drupalLogin($this->createUser([], NULL, TRUE));
+    $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
+    $this->drupalGet($path);
+
+    $this->fillField('data[value]', 'too-long');
+    $this->pressButton('Submit');
+    $this->assertSession()
+      ->fieldExists('data[value]')
+      ->hasClass('error');
+
+    // Make sure the changes have not been saved also.
+    $this->drupalGet($path);
+    $this->assertSession()->fieldValueEquals('data[value]', $context_definition->getDefaultValue());
   }
 
 }

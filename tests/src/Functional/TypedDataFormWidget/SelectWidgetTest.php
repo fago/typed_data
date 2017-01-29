@@ -9,6 +9,7 @@ use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\typed_data\BrowserTestHelpersTrait;
+use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
 /**
@@ -22,6 +23,7 @@ class SelectWidgetTest extends BrowserTestBase {
 
   use BrowserTestHelpersTrait;
   use FormWidgetManagerTrait;
+  use StateTrait;
   use TypedDataTrait;
 
   /**
@@ -79,7 +81,7 @@ class SelectWidgetTest extends BrowserTestBase {
     $context_definition = ContextDefinition::create('filter_format')
       ->setLabel('Filter format')
       ->setDescription('Some example selection.');
-    \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
+    $this->getState()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));
     $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
@@ -94,6 +96,33 @@ class SelectWidgetTest extends BrowserTestBase {
 
     $this->drupalGet($path);
     $this->assertSession()->fieldValueEquals('data[value]', 'plain_text');
+  }
+
+  /**
+   * @covers ::form
+   * @covers ::flagViolations
+   */
+  public function testValidation() {
+    $context_definition = ContextDefinition::create('filter_format')
+      ->setLabel('Filter format')
+      ->setDescription('Some example selection.')
+      ->setRequired(TRUE);
+    $this->getState()->set('typed_data_widgets.definition', $context_definition);
+
+    $this->drupalLogin($this->createUser([], NULL, TRUE));
+    $path = 'admin/config/user-interface/typed-data-widgets/' . $this->widget->getPluginId();
+    $this->drupalGet($path);
+
+    // Set the empty option and make sure it results in a violation.
+    $this->fillField('data[value]', '');
+    $this->pressButton('Submit');
+    $this->assertSession()
+      ->fieldExists('data[value]')
+      ->hasClass('error');
+
+    // Make sure the changes have not been saved also.
+    $this->drupalGet($path);
+    $this->assertSession()->fieldValueEquals('data[value]', $context_definition->getDefaultValue());
   }
 
 }
