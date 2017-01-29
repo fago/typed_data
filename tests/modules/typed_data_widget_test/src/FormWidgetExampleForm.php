@@ -50,19 +50,20 @@ class FormWidgetExampleForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $widget_id = NULL) {
     $widget = $this->getFormWidgetManager()->createInstance($widget_id);
-    $context_definition = $this->getExampleContextDefinition($widget_id);
-    $form_state->set('widget_id', $widget_id);
-    $form_state->set('context_definition', $context_definition);
-
 
     // Read and write widget configuration into the state.
     // @todo: Create a StateTrait in core and use it here.
     $state = \Drupal::state();
-    $value = $state->get('typed_data_wigets.' . $widget_id);
+    // Allow tests to define a custom context definition.
+    $context_definition = $state->get('typed_data_widgets.definition');
+    $context_definition = $context_definition ?: $this->getExampleContextDefinition($widget_id);
+    $form_state->set('widget_id', $widget_id);
+    $form_state->set('context_definition', $context_definition);
 
     // Create a typed data object.
     $data = $this->getTypedDataManager()
       ->create($context_definition->getDataDefinition());
+    $value = $state->get('typed_data_widgets.' . $widget_id);
     $value = isset($value) ? $value : $context_definition->getDefaultValue();
     $data->setValue($value);
 
@@ -113,7 +114,7 @@ class FormWidgetExampleForm extends FormBase {
     // Read and write widget configuration into the state.
     // @todo: Create a StateTrait in core and use it here.
     $state = \Drupal::state();
-    $state->set('typed_data_wigets.' . $widget_id, $data->getValue());
+    $state->set('typed_data_widgets.' . $widget_id, $data->getValue());
     drupal_set_message('Value saved');
   }
 }

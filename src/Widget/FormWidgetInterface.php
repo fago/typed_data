@@ -3,6 +3,7 @@
 namespace Drupal\typed_data\Widget;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
+use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 /**
  * Interface definition for form widget plugins.
  */
-interface FormWidgetInterface extends ConfigurablePluginInterface {
+interface FormWidgetInterface extends ConfigurablePluginInterface, PluginInspectionInterface {
 
   /**
    * Returns if the widget can be used for the provided data.

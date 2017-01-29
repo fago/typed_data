@@ -5,6 +5,8 @@ namespace Drupal\typed_data\Plugin\TypedDataFormWidget;
 use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
+use Drupal\Core\TypedData\Type\FloatInterface;
+use Drupal\Core\TypedData\Type\IntegerInterface;
 use Drupal\Core\TypedData\Type\StringInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\typed_data\Form\SubformState;
@@ -39,7 +41,9 @@ class TextInputWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function isApplicable(DataDefinitionInterface $definition) {
-    return is_subclass_of($definition->getClass(), StringInterface::class);
+    return is_subclass_of($definition->getClass(), StringInterface::class) ||
+      is_subclass_of($definition->getClass(), IntegerInterface::class) ||
+      is_subclass_of($definition->getClass(), FloatInterface::class);
   }
 
   /**
