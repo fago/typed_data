@@ -2,13 +2,14 @@
 
 namespace Drupal\typed_data\Form;
 
+use Drupal\Core\Form\SubformState as CoreSubformState;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Class SubformState.
  */
-class SubformState extends \Drupal\Core\Form\SubformState {
+class SubformState extends CoreSubformState {
 
   /**
    * The array parents; i.e., where the sub-form is located in the parent.
@@ -31,7 +32,7 @@ class SubformState extends \Drupal\Core\Form\SubformState {
    *
    * @return static
    */
-  public static function createWithParents($arrayParents, array &$parentForm, FormStateInterface$parentFormState) {
+  public static function createWithParents($arrayParents, array &$parentForm, FormStateInterface $parentFormState) {
     $exists = NULL;
     $form = &NestedArray::getValue($parentForm, $arrayParents, $exists);
     if (!$exists) {

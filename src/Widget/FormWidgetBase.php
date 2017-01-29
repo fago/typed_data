@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Base class for 'form widget' plugin implementations.
  */
-abstract class FormWidgetBase extends PluginBase implements FormWidgetInterface, ContainerFactoryPluginInterface  {
+abstract class FormWidgetBase extends PluginBase implements FormWidgetInterface, ContainerFactoryPluginInterface {
 
   /**
    * The typed data manager.
@@ -29,8 +29,6 @@ abstract class FormWidgetBase extends PluginBase implements FormWidgetInterface,
 
   /**
    * {@inheritdoc}
-   *
-   *
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, TypedDataManagerInterface $typedDataManager) {
     parent::__construct($configuration + $this->defaultConfiguration(), $plugin_id, $plugin_definition);

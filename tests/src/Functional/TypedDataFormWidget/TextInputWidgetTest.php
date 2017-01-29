@@ -75,9 +75,9 @@ class TextInputWidgetTest extends BrowserTestBase {
    */
   public function testFormEditing() {
     $context_definition = ContextDefinition::create('string')
-          ->setLabel('Example string')
-          ->setDescription('Some example string')
-          ->setDefaultValue('default1');
+      ->setLabel('Example string')
+      ->setDescription('Some example string')
+      ->setDefaultValue('default1');
     \Drupal::state()->set('typed_data_widgets.definition', $context_definition);
 
     $this->drupalLogin($this->createUser([], NULL, TRUE));

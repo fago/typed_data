@@ -71,10 +71,10 @@ class FormWidgetExampleForm extends FormBase {
     $form['data'] = $widget->form($data, $subform_state);
 
     $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = array(
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => 'Submit',
-    );
+    ];
     return $form;
   }
 
@@ -117,4 +117,5 @@ class FormWidgetExampleForm extends FormBase {
     $state->set('typed_data_widgets.' . $widget_id, $data->getValue());
     drupal_set_message('Value saved');
   }
+
 }
