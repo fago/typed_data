@@ -43,6 +43,8 @@ interface DataFetcherInterface {
    *   The data from which to select a value.
    * @param string[] $sub_paths
    *   A list of sub paths; i.e., a property path separated into its parts.
+   * @param \Drupal\Core\Render\BubbleableMetadata|null $bubbleable_metadata
+   *   (optional) An object to which required bubbleable metadata will be added.
    * @param string $langcode
    *   (optional) The language code used to get the argument value if the
    *   argument value should be translated. Defaults to NULL.
