@@ -13,6 +13,8 @@ use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
+ * Plugin implementation of the 'select' widget.
+ *
  * @TypedDataFormWidget(
  *   id = "select",
  *   label = @Translation("Select"),

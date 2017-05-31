@@ -128,7 +128,7 @@ class DataDefinitionFetcherTest extends KernelTestBase {
   }
 
   /**
-   * @cover fetchDefinitionByPropertyPath
+   * @covers ::fetchDefinitionByPropertyPath
    */
   public function testFetchingAcrossReferences() {
     $target_definition = $this->nodeDefinition
