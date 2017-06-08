@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\typed_data;
+namespace Drupal\Tests\typed_data\Traits;
 
 /**
  * Provides some helpers for BrowserTestBase.
