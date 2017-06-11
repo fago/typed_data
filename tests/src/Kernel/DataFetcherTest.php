@@ -187,10 +187,10 @@ class DataFetcherTest extends KernelTestBase {
 
   /**
    * @covers ::fetchDataByPropertyPath
-   * @expectedException \Drupal\Core\TypedData\Exception\MissingDataException
-   * @expectedExceptionMessage Unable to apply data selector 'field_integer.0.value' at 'field_integer.0'
    */
   public function testFetchingValueAtInvalidPosition() {
+    $this->expectException(\Drupal\Core\TypedData\Exception\MissingDataException::class);
+    $this->expectExceptionMessage("Unable to apply data selector 'field_integer.0.value' at 'field_integer.0'");
     $this->node->field_integer->setValue([]);
 
     // This should trigger an exception.
@@ -201,10 +201,10 @@ class DataFetcherTest extends KernelTestBase {
 
   /**
    * @covers ::fetchDataByPropertyPath
-   * @expectedException \Drupal\typed_data\Exception\InvalidArgumentException
-   * @expectedExceptionMessage Unable to apply data selector 'field_invalid.0.value' at 'field_invalid'
    */
   public function testFetchingInvalidProperty() {
+    $this->expectException(\Drupal\typed_data\Exception\InvalidArgumentException::class);
+    $this->expectExceptionMessage("Unable to apply data selector 'field_invalid.0.value' at 'field_invalid'");
     // This should trigger an exception.
     $this->dataFetcher
       ->fetchDataByPropertyPath($this->node->getTypedData(), 'field_invalid.0.value')
@@ -225,9 +225,9 @@ class DataFetcherTest extends KernelTestBase {
 
   /**
    * @covers ::fetchDataByPropertyPath
-   * @expectedException \Drupal\Core\TypedData\Exception\MissingDataException
    */
   public function testFetchingNotExistingListItem() {
+    $this->expectException(\Drupal\Core\TypedData\Exception\MissingDataException::class);
     $this->node->field_integer->setValue([]);
 
     // This will throw an exception.
@@ -238,10 +238,10 @@ class DataFetcherTest extends KernelTestBase {
 
   /**
    * @covers ::fetchDataByPropertyPath
-   * @expectedException \Drupal\Core\TypedData\Exception\MissingDataException
-   * @expectedExceptionMessageRegExp #Unable to apply data selector 'field_integer.0.value' at 'field_integer':.*#
    */
   public function testFetchingFromEmptyData() {
+    $this->expectException(\Drupal\Core\TypedData\Exception\MissingDataException::class);
+    $this->expectExceptionMessageRegExp("#Unable to apply data selector 'field_integer.0.value' at 'field_integer':.*#");
     $data_empty = $this->typedDataManager->create(EntityDataDefinition::create('node'));
     // This should trigger an exception.
     $this->dataFetcher
