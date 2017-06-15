@@ -24,4 +24,8 @@
 
   <!-- We always want short array syntax only. -->
   <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+
+  <rule ref="Generic.Files.LineLength">
+    <exclude-pattern>./README.md</exclude-pattern>
+  </rule>
 </ruleset>
