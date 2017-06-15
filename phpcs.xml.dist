@@ -26,6 +26,6 @@
   <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
 
   <rule ref="Generic.Files.LineLength">
-    <exclude-pattern>./README.md</exclude-pattern>
+    <exclude-pattern>README.md</exclude-pattern>
   </rule>
 </ruleset>
