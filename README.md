@@ -1,6 +1,6 @@
 # Typed Data API module
 
-[![Build Status](https://travis-ci.org/fago/typed_data.svg?branch=8.x-1.x)](https://travis-ci.org/fago/typed_data)
+[![Build Status](https://travis-ci.org/fago/typed_data.svg?branch=8.x-1.x)](https://travis-ci.org/fago/typed_data) // @codingStandardsIgnoreLine
 
 Extends the core Typed Data API with new APIs and features.
 
@@ -9,7 +9,7 @@ Extends the core Typed Data API with new APIs and features.
 
 ## Contributing
 
-Always use the  [Typed Data module issue queue](https://www.drupal.org/project/issues/typed_data).
+Always use the  [Typed Data module issue queue](https://www.drupal.org/project/issues/typed_data). // @codingStandardsIgnoreLine
 
 Development happens on GitHub using the pull request model:
 in case you are not familiar with that, please take a few minutes to read the
@@ -18,15 +18,15 @@ pull requests.
 
 There are a few conventions that should be followed when contributing:
 
-* Always create an issue in the [drupal.org Typed Data issue queue](https://www.drupal.org/project/issues/typed_data)
+* Always create an issue in the [drupal.org Typed Data issue queue](https://www.drupal.org/project/issues/typed_data) // @codingStandardsIgnoreLine
   for every pull request you are working on.
 * Always cross-reference the Issue in the Pull Request and the Pull Request in
   the issue.
 * Always create a new branch for every pull request: its name should contain a
   brief summary of the ticket and its issue id, e.g **readme-2276369**.
 * Try to keep the history of your pull request as clean as possible by squashing
-  your commits: you can look at the [Symfony documentation](http://symfony.com/doc/current/cmf/contributing/commits.html)
-  or at the [Git book](http://git-scm.com/book/en/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages)
+  your commits: you can look at the [Symfony documentation](http://symfony.com/doc/current/cmf/contributing/commits.html) // @codingStandardsIgnoreLine
+  or at the [Git book](http://git-scm.com/book/en/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) // @codingStandardsIgnoreLine
   for more information on how to do that.
 
 For further information on how to contribute please refer to
