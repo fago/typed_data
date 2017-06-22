@@ -261,7 +261,7 @@ class DataFetcher implements DataFetcherInterface {
   /**
    * Generates autocomplete suggestions for a matched data definition.
    *
-   * @param DataDefinitionInterface $data_definition
+   * @param \Drupal\Core\TypedData\DataDefinitionInterface $data_definition
    *   The data definition to inspect.
    * @param string $variable_name
    *   The variable name or property path.
