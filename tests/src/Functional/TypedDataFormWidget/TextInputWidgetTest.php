@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\typed_data\BrowserTestHelpersTrait;
+use Drupal\Tests\typed_data\Traits\BrowserTestHelpersTrait;
 use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
