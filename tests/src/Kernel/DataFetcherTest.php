@@ -191,8 +191,7 @@ class DataFetcherTest extends KernelTestBase {
    * @covers ::fetchDataByPropertyPath
    */
   public function testFetchingValueAtInvalidPosition() {
-    $this->setExpectedException(MissingDataException::class);
-    $this->expectExceptionMessage("Unable to apply data selector 'field_integer.0.value' at 'field_integer.0'");
+    $this->setExpectedException(MissingDataException::class, "Unable to apply data selector 'field_integer.0.value' at 'field_integer.0'");
     $this->node->field_integer->setValue([]);
 
     // This should trigger an exception.
@@ -205,8 +204,7 @@ class DataFetcherTest extends KernelTestBase {
    * @covers ::fetchDataByPropertyPath
    */
   public function testFetchingInvalidProperty() {
-    $this->setExpectedException(InvalidArgumentException::class);
-    $this->expectExceptionMessage("Unable to apply data selector 'field_invalid.0.value' at 'field_invalid'");
+    $this->setExpectedException(InvalidArgumentException::class, "Unable to apply data selector 'field_invalid.0.value' at 'field_invalid'");
     // This should trigger an exception.
     $this->dataFetcher
       ->fetchDataByPropertyPath($this->node->getTypedData(), 'field_invalid.0.value')
@@ -242,8 +240,7 @@ class DataFetcherTest extends KernelTestBase {
    * @covers ::fetchDataByPropertyPath
    */
   public function testFetchingFromEmptyData() {
-    $this->setExpectedException(MissingDataException::class);
-    $this->expectExceptionMessageRegExp("#Unable to apply data selector 'field_integer.0.value' at 'field_integer':.*#");
+    $this->setExpectedException(MissingDataException::class, "#Unable to apply data selector 'field_integer.0.value' at 'field_integer':.*#");
     $data_empty = $this->typedDataManager->create(EntityDataDefinition::create('node'));
     // This should trigger an exception.
     $this->dataFetcher
