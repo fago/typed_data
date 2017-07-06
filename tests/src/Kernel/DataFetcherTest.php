@@ -240,7 +240,7 @@ class DataFetcherTest extends KernelTestBase {
    * @covers ::fetchDataByPropertyPath
    */
   public function testFetchingFromEmptyData() {
-    $this->setExpectedException(MissingDataException::class, "#Unable to apply data selector 'field_integer.0.value' at 'field_integer':.*#");
+    $this->setExpectedException(MissingDataException::class, "Unable to apply data selector 'field_integer.0.value' at 'field_integer': Unable to get property field_integer as no entity has been provided.");
     $data_empty = $this->typedDataManager->create(EntityDataDefinition::create('node'));
     // This should trigger an exception.
     $this->dataFetcher
