@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedDataTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\typed_data\BrowserTestHelpersTrait;
+use Drupal\Tests\typed_data\Traits\BrowserTestHelpersTrait;
 use Drupal\typed_data\Util\StateTrait;
 use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 
@@ -55,18 +55,7 @@ class TextareaWidgetTest extends BrowserTestBase {
    * @covers ::isApplicable
    */
   public function testIsApplicable() {
-    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
-    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
-    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));;
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('duration_iso8601')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('email')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('float')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('integer')));
     $this->assertTrue($this->widget->isApplicable(DataDefinition::create('string')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('timespan')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('timestamp')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('uri')));
     $this->assertFalse($this->widget->isApplicable(ListDataDefinition::create('string')));
     $this->assertFalse($this->widget->isApplicable(MapDataDefinition::create()));
   }
