@@ -14,6 +14,8 @@ use Drupal\typed_data\Widget\FormWidgetBase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
+ * Plugin implementation of the 'text_input' widget.
+ *
  * @TypedDataFormWidget(
  *   id = "text_input",
  *   label = @Translation("Text input"),
