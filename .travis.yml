@@ -12,8 +12,9 @@ php:
   #- hhvm
 
 env:
-  - DRUPAL_CORE=8.2.x
   - DRUPAL_CORE=8.3.x
+  - DRUPAL_CORE=8.4.x
+  - DRUPAL_CORE=8.5.x
 
 matrix:
   allow_failures:
@@ -60,6 +61,10 @@ before_script:
   # Run composer install for Drupal 8.1 and up. We need an up-to-date composer
   # when installing Drupal 8.1.
   - travis_retry composer self-update && travis_retry composer install
+  
+  # Run composer install in the Typed Data module directory in order to fetch dev
+  # dependencies there. This includes phpcs & coder for checking coding style.
+  - travis_retry cd modules/typed_data && composer install
 
   # Start a web server on port 8888, run in the background.
   - php -S localhost:8888 &
@@ -67,12 +72,8 @@ before_script:
   # Export web server URL for browser tests.
   - export SIMPLETEST_BASE_URL=http://localhost:8888
 
-  # Install PHPCS to check for Drupal coding standards.
-  - travis_retry composer global require drupal/coder
-  - ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
-
 script:
   # Run the PHPUnit tests which also include the kernel tests.
   - ./vendor/bin/phpunit -c ./core/phpunit.xml.dist ./modules/typed_data
-  # Check for coding standards violations
-  - cd modules/typed_data && ~/.composer/vendor/bin/phpcs
+  # Check for coding standards.
+  - cd modules/typed_data && ./vendor/bin/phpcs --colors --report-width=130
