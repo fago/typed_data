@@ -37,6 +37,7 @@ For further information on how to contribute please refer to
 The module comes with a phpcs setup that is verifying a correct coding style.
 To run the check just execute the following command from the rules module
 directory:
+
     # Install phpcs as local dev dependency, then run it:
     composer install
     ./vendor/bin/phpcs
@@ -57,4 +58,4 @@ your local Drupal installation for SIMPLETEST_BASE_URL.
     cd /path/to/drupal-8/core
     export SIMPLETEST_DB=mysql://drupal-8:password@localhost/drupal-8
     export SIMPLETEST_BASE_URL=http://drupal-8.localhost
-    ../vendor/bin/phpunit ../modules/typed_data/tests/src/Unit/ActionSetTest.php
+    ../vendor/bin/phpunit ../modules/typed_data
