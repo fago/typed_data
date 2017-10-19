@@ -3,7 +3,7 @@
 namespace Drupal\typed_data\Context;
 
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use \Drupal\Core\Plugin\Discovery\AnnotatedClassDiscovery as CoreAnnotatedClassDiscovery;
+use Drupal\Core\Plugin\Discovery\AnnotatedClassDiscovery as CoreAnnotatedClassDiscovery;
 
 /**
  * Extends the annotation class discovery for usage with Typed data context.

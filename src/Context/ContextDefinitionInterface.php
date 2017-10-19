@@ -2,7 +2,7 @@
 
 namespace Drupal\typed_data\Context;
 
-use \Drupal\Core\Plugin\Context\ContextDefinitionInterface as CoreContextDefinitionInterfaceCore;
+use Drupal\Core\Plugin\Context\ContextDefinitionInterface as CoreContextDefinitionInterfaceCore;
 
 /**
  * Context definition information required by Typed data.
