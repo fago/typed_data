@@ -12,13 +12,6 @@
   <rule ref="Drupal.NamingConventions.ValidVariableName.LowerCamelName">
     <!-- Annotations must use the same property names as in the configuration. -->
     <exclude-pattern>src/Annotation</exclude-pattern>
-    <exclude-pattern>src/Core/Annotation</exclude-pattern>
-    <exclude-pattern>src/Ui/RulesUiDefinition.php</exclude-pattern>
-  </rule>
-
-  <!-- The method is overridden with a reason - for better PHPdoc! -->
-  <rule ref="Generic.CodeAnalysis.UselessOverridingMethod.Found">
-    <exclude-pattern>./src/Core/ConditionManager.php</exclude-pattern>
   </rule>
 
   <!--Blacklist of coding standard rules that are not yet fixed. -->
