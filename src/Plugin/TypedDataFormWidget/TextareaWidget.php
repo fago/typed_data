@@ -38,7 +38,9 @@ class TextareaWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function isApplicable(DataDefinitionInterface $definition) {
-    return is_subclass_of($definition->getClass(), StringInterface::class);
+    return is_subclass_of($definition->getClass(), StringInterface::class) ||
+      is_subclass_of($definition->getClass(), IntegerInterface::class) ||
+      is_subclass_of($definition->getClass(), FloatInterface::class);
   }
 
   /**
