@@ -58,15 +58,15 @@ class TextareaWidgetTest extends BrowserTestBase {
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));;
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('duration_iso8601')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('email')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('float')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('integer')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));;
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('duration_iso8601')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('email')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('float')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('integer')));
     $this->assertTrue($this->widget->isApplicable(DataDefinition::create('string')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('timespan')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('timestamp')));
-    $this->assertTrue($this->widget->isApplicable(DataDefinition::create('uri')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('timespan')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('timestamp')));
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('uri')));
     $this->assertFalse($this->widget->isApplicable(ListDataDefinition::create('string')));
     $this->assertFalse($this->widget->isApplicable(MapDataDefinition::create()));
   }
