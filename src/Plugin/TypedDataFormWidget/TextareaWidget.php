@@ -5,7 +5,11 @@ namespace Drupal\typed_data\Plugin\TypedDataFormWidget;
 use Drupal\Core\Form\SubformStateInterface;
 use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\DataDefinitionInterface;
+use Drupal\Core\TypedData\Plugin\DataType\Email;
+use Drupal\Core\TypedData\Type\DateTimeInterface;
+use Drupal\Core\TypedData\Type\DurationInterface;
 use Drupal\Core\TypedData\Type\StringInterface;
+use Drupal\Core\TypedData\Type\UriInterface;
 use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\typed_data\Form\SubformState;
 use Drupal\typed_data\Widget\FormWidgetBase;
@@ -38,7 +42,23 @@ class TextareaWidget extends FormWidgetBase {
    * {@inheritdoc}
    */
   public function isApplicable(DataDefinitionInterface $definition) {
-    return is_subclass_of($definition->getClass(), StringInterface::class);
+    if (is_subclass_of($definition->getClass(), StringInterface::class)) {
+      $result = TRUE;
+      // Never use textarea for editing dates, durations, e-mail or URIs.
+      $classes = [
+        DateTimeInterface::class,
+        DurationInterface::class,
+        Email::class,
+        UriInterface::class,
+      ];
+      foreach ($classes as $class) {
+        $result = $result && !is_subclass_of($definition->getClass(), $class) && $definition->getClass() != $class;
+      }
+      return $result;
+    }
+    else {
+      return FALSE;
+    }
   }
 
   /**
