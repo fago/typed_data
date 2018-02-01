@@ -48,6 +48,9 @@ class FormWidgetExampleForm extends FormBase {
         return ContextDefinition::create('filter_format')
           ->setLabel('Filter format')
           ->setDescription('Some example selection.');
+      case 'broken':
+        return ContextDefinition::create('string')
+          ->setLabel('Example string');
     }
 
   }
