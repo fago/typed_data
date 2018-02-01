@@ -44,10 +44,12 @@ class FormWidgetExampleForm extends FormBase {
           ->setDescription('Some example string with max. 8 characters.')
           ->setDefaultValue('default')
           ->addConstraint('Length', ['max' => 8]);
+
       case 'select':
         return ContextDefinition::create('filter_format')
           ->setLabel('Filter format')
           ->setDescription('Some example selection.');
+
       case 'broken':
         return ContextDefinition::create('string')
           ->setLabel('Example string');
