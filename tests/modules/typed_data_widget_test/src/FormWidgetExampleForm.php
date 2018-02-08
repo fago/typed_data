@@ -48,6 +48,14 @@ class FormWidgetExampleForm extends FormBase {
         return ContextDefinition::create('filter_format')
           ->setLabel('Filter format')
           ->setDescription('Some example selection.');
+      case 'datetime':
+        return ContextDefinition::create('datetime_iso8601')
+          ->setLabel('Example datetime')
+          ->setDescription('Some example datetime.');
+      case 'datetime_range':
+        return ContextDefinition::create('any')
+          ->setLabel('Example datetime range')
+          ->setDescription('Some example datetime range.');
     }
 
   }
